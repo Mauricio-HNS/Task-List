@@ -136,4 +136,4 @@ O servidor do frontend estará rodando na URL `http://localhost:4200`.
 
 Se quiser rodar em produção, você pode compilar ambos os projetos e colocá-los em um servidor, ou utilizar Docker para empacotar tudo e facilitar a implantação em diferentes máquinas.
 
-Caso tenha dúvidas sobre qualquer uma dessas etapas, posso detalhar mais!
+
