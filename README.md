@@ -1,139 +1,85 @@
-<h1>TODO LIST ANGULAR & ASP.NET CORE</h1>
-Para instalar e rodar um projeto com um backend em **ASP.NET Core** e um frontend em **Angular** em diferentes máquinas, você pode seguir os passos abaixo. Isso envolve a preparação do ambiente em cada máquina, a instalação das dependências necessárias e a execução do projeto.
+# Task Management — ASP.NET Core + Angular
 
-### Pré-requisitos
-1. **Backend - ASP.NET Core:**
-   - **.NET SDK**: Certifique-se de que o SDK do .NET está instalado. [Baixe e instale aqui](https://dotnet.microsoft.com/en-us/download).
-   - **SQL Server** (ou outro banco de dados configurado).
+Task management application with an ASP.NET Core backend and Angular frontend.
 
-2. **Frontend - Angular:**
-   - **Node.js**: Baixe e instale a versão LTS do Node.js [aqui](https://nodejs.org/).
-   - **Angular CLI**: Instale o Angular CLI globalmente.
-     ```bash
-     npm install -g @angular/cli
-     ```
+## Why this repository matters
 
-### Passo a Passo: Instalação e Execução
+This project is one of the transition points in my development history: it started from a straightforward task-management application and evolved into a more structured web solution with authentication, SQL Server persistence and Microsoft identity integration.
 
-#### 1. Clonar o Projeto
+I keep the repository because it shows the progression from CRUD applications toward authenticated, production-oriented web systems.
 
-Em cada máquina, o projeto precisará ser clonado do repositório (GitHub ou outro local):
+## Architecture
 
-```bash
-git clone https://github.com/usuario/projeto.git
+```text
+Angular UI
+    │
+    ▼
+ASP.NET Core
+    ├── Authentication / Authorization
+    ├── Task management
+    └── Entity Framework Core
+            │
+            ▼
+        SQL Server
 ```
 
-#### 2. Configurar o **Backend** (ASP.NET Core)
+## Current stack
 
-##### a. Instalar Dependências do Backend
+- .NET 8 / ASP.NET Core
+- Entity Framework Core
+- SQL Server
+- Microsoft Identity Web
+- OpenID Connect
+- Angular
+- TypeScript
 
-Navegue até a pasta do backend (onde o arquivo `.csproj` está localizado) e execute:
+## Running the backend
+
+From the backend directory:
 
 ```bash
-cd path/to/backend
 dotnet restore
-```
-
-##### b. Configurar a Connection String
-
-Edite o arquivo `appsettings.json` (ou `appsettings.Development.json`) para configurar a connection string do banco de dados, por exemplo:
-
-```json
-"ConnectionStrings": {
-  "DefaultConnection": "Server=localhost;Database=TaskManagementDb;Trusted_Connection=True;"
-}
-```
-
-Se o banco de dados ainda não foi criado, você pode rodar as migrações do **Entity Framework**:
-
-```bash
-dotnet ef database update
-```
-
-##### c. Rodar o Backend
-
-Agora, você pode rodar o backend:
-
-```bash
 dotnet run
 ```
 
-Isso irá iniciar o servidor backend (provavelmente na URL `http://localhost:5000`).
+Configure the connection string and identity settings through local configuration/user secrets. Do not commit credentials.
 
-#### 3. Configurar o **Frontend** (Angular)
+## Running the frontend
 
-##### a. Instalar Dependências do Frontend
-
-Navegue até a pasta do frontend (onde o `package.json` está localizado) e instale as dependências do projeto:
+From the Angular application directory:
 
 ```bash
-cd path/to/frontend
 npm install
-```
-
-##### b. Configurar as Variáveis de Ambiente
-
-Certifique-se de que o frontend está configurado para se comunicar com o backend. No Angular, edite o arquivo `src/environments/environment.ts`:
-
-```typescript
-export const environment = {
-  production: false,
-  apiUrl: 'http://localhost:5000/api'
-};
-```
-
-Essa URL deve apontar para o backend em execução.
-
-##### c. Rodar o Frontend
-
-Agora, execute o frontend:
-
-```bash
 ng serve
 ```
 
-O servidor do frontend estará rodando na URL `http://localhost:4200`.
+The Angular application should point to the running ASP.NET Core API.
 
-### 4. Acessar a Aplicação
+## Engineering evolution
 
-- Acesse o frontend via `http://localhost:4200`.
-- O frontend se comunicará com o backend via API.
+```text
+CRUD
+ ↓
+Layered application
+ ↓
+Authentication
+ ↓
+Identity integration
+ ↓
+Persistence and migrations
+ ↓
+Cloud-ready application architecture
+```
 
-### Resumo dos Comandos
+## Status
 
-**Para o backend:**
-1. Clonar o projeto.
-   ```bash
-   git clone https://github.com/usuario/projeto.git
-   ```
-2. Navegar até a pasta do backend e instalar dependências:
-   ```bash
-   cd path/to/backend
-   dotnet restore
-   ```
-3. Configurar a connection string e rodar as migrações:
-   ```bash
-   dotnet ef database update
-   ```
-4. Executar o backend:
-   ```bash
-   dotnet run
-   ```
+Maintained as a portfolio and evolution project. The codebase is intentionally preserved instead of being rewritten into a completely different architecture.
 
-**Para o frontend:**
-1. Navegar até a pasta do frontend e instalar dependências:
-   ```bash
-   cd path/to/frontend
-   npm install
-   ```
-2. Configurar a URL da API no `environment.ts`.
-3. Executar o frontend:
-   ```bash
-   ng serve
-   ```
+## Next evolution
 
-### Implantação em Produção
-
-Se quiser rodar em produção, você pode compilar ambos os projetos e colocá-los em um servidor, ou utilizar Docker para empacotar tudo e facilitar a implantação em diferentes máquinas.
-
-
+- API integration tests
+- stronger application/service boundaries
+- centralized validation
+- structured logging and observability
+- containerized local development
+- CI build/test pipeline
